@@ -116,6 +116,7 @@ console.log(params.item)
           <p className="mt-4 text-gray-800 text-lg font-bold">${selecteditem.discountPrice}</p>
           <p className="text-gray-500 line-through">${selecteditem.price}</p>
           <button className="bg-pink-500 text-white py-2 px-6 rounded-full mt-4">Add to Cart</button>
+
           <div className="mt-8">
             <ul className="flex border-b">
               <li className="mr-1">
