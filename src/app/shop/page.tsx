@@ -65,7 +65,7 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <div key={product.id} className="bg-white rounded-lg shadow p-4 hover:shadow-lg transition">
-              <Link href={`/shop/product${product.id}`}>
+              <Link href={`/shop/${product.id-1}`}>
                 <div>
                   <img
                     src={product.image}
