@@ -13,7 +13,7 @@ interface Product {
   price: number;
   quantity: number;
 }
-export default function(){
+export default function Home(){
   const [products, setProducts] = useState<Product[]>([
     { id: 1, name: 'Ut diam consequat', color: 'Brown', size: 'XL', price: 32, quantity: 1 },
     { id: 2, name: 'Vel facilisis posuere', color: 'Brown', size: 'XL', price: 32, quantity: 1 },

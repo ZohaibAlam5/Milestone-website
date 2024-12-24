@@ -3,6 +3,8 @@ import Header from '../Components/component1';
 import Foot from '../Components/component2';
 import Bottom1 from '../Components/component3';
 import { products } from '../data/page';
+import Image from 'next/image';
+
 
 
 export default function Home() {
@@ -67,10 +69,12 @@ export default function Home() {
             <div key={product.id} className="bg-white rounded-lg shadow p-4 hover:shadow-lg transition">
               <Link href={`/shop/${product.id-1}`}>
                 <div>
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
                     className="rounded-md w-full h-40 object-cover mb-4"
+                    width={300}
+                    height={200}
                   />
                   <h3 className="text-lg font-semibold text-gray-700">{product.name}</h3>
                   <p className="text-gray-500 text-sm">{product.description}</p>
