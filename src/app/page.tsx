@@ -48,11 +48,12 @@ export default function Home() {
                 index === 1 ? "border-2 border-[#FF3E66]" : ""
               }`}
             >
-              <img
+              <Image
                 src={`/chair-${product.id}.png`}
                 alt={product.name}
-                className="w-full h-32 object-cover mb-4"
-
+                className=" object-cover mb-4"
+                width={200}
+                height={200}
               />
               <h4 className="text-lg font-semibold">{product.name}</h4>
               <p className="text-gray-500">{product.price}</p>
@@ -82,10 +83,12 @@ export default function Home() {
               key={index}
               className="border rounded-lg p-4 shadow-md flex flex-col items-center"
             >
-              <img
+              <Image
                 src={`/chair-${product.image}.png`}
                 alt={product.name}
                 className="w-32 h-32 object-cover mb-4"
+                height={200}
+                width={200}
               />
               <h4 className="text-lg font-semibold text-center">
                 {product.name}
@@ -158,11 +161,13 @@ export default function Home() {
               className="p-4 border rounded-lg shadow hover:shadow-lg transition"
             >
               <div className="h-40 bg-gray-200 rounded mb-4">
-                <img
+                <Image
                 src={`/chair-${item.id}.png`}
                 alt={item.name}
                 className="w-32 h-32 object-cover mb-4 mx-20"
-                />
+                width={200}
+                height={200}
+              />
               </div>
               <h3 className="font-semibold text-lg">{item.name}</h3>
               <p className="text-gray-600">{item.price}</p>
@@ -176,10 +181,12 @@ export default function Home() {
       <section className="bg-gray-100 py-10 px-4">
         <div className="flex flex-col md:flex-row items-center">
           <div className="flex-1">
-            <img
+            <Image
               src="/chair-18.png"
               alt="Discount Item"
               className="w-full max-w-xs mx-auto"
+              width={200}
+              height={200}
             />
           </div>
           <div className="flex-1 text-center md:text-left">

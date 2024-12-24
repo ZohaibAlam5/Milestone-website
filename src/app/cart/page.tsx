@@ -3,6 +3,7 @@ import Header from "../Components/component1";
 import Foot from "../Components/component2";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Product {
   id: number;
@@ -57,7 +58,12 @@ export default function(){
                 <tr key={product.id}>
                   <td className="py-2">
                     <div className="flex items-center">
-                      <img src={`/cart${product.id}.png`} alt={product.name} className="w-16 h-16 mr-4" />
+                      <Image src={`/cart${product.id}.png`} 
+                      alt={product.name} 
+                      className="w-16 h-16 mr-4" 
+                      width={83}
+                      height={87}
+                      />
                       <div>
                         <div>{product.name}</div>
                         <div className="text-sm text-gray-500">Color: {product.color}</div>

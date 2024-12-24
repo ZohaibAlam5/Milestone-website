@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import icon from "/Coding/html-css-react/milestone-website/public/Logo.png"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

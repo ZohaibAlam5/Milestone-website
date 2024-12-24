@@ -5,6 +5,7 @@ import Foot from "@/app/Components/component2";
 import Bottom1 from "@/app/Components/component3";
 import { useState } from "react";
 import { useEffect } from "react";
+import Image from "next/image";
 
 const Products= [
   
@@ -103,10 +104,12 @@ console.log(params.item)
     <div className="container mx-auto p-4">
       <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-1/2">
-          <img
+          <Image
             src={selecteditem.image}
             alt={selecteditem.name}
             className="rounded-md w-full h-80 object-cover"
+            width={300}
+            height={200}
             
           />
         </div>

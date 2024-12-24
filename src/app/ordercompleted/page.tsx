@@ -3,7 +3,7 @@ import Foot from "../Components/component2";
 import Bottom1 from "../Components/component3";
 import Link from "next/link";
 
-export default function(){
+export default function Home(){
     return(
         <div>
             <Header/>

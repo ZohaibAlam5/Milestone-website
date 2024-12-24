@@ -2,7 +2,7 @@
 import Header from "../Components/component1";
 import Foot from "../Components/component2";
 import Link from "next/link";
-
+import Image from "next/image";
 
 export default function ShoppingInformation() {
   // Array of products
@@ -12,21 +12,21 @@ export default function ShoppingInformation() {
       name: 'Product 1',
       size: 'XL',
       price: 50.0,
-      image: 'https://www.renome.pk/wp-content/uploads/2021/11/County-Dining-Chair-1.jpg',
+      image: '/hdemo1.jpg',
     },
     {
       id: 2,
       name: 'Product 2',
       size: 'M',
       price: 45.0,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcOxqUKjlhHp0kH4lZIBQo6gM1_G5F-Ber2w&s',
+      image: '/hdemo2.jpg',
     },
     {
       id: 3,
       name: 'Product 3',
       size: 'L',
       price: 60.0,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzJbavR085yPcuudSBHWrablckrselstzsRg&s',
+      image: '/hdemo3.jpg',
     },
     // Add more products as needed
   ];
@@ -104,7 +104,7 @@ export default function ShoppingInformation() {
             {products.map((product) => (
               <li key={product.id} className="flex justify-between items-center">
                 <div className="flex items-center">
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
                     width={40}
