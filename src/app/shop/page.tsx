@@ -4,7 +4,7 @@ import Foot from '../Components/component2';
 import Bottom1 from '../Components/component3';
 import Image from 'next/image';
 
-export const products = [
+const products = [
   
   {
   id:1,
