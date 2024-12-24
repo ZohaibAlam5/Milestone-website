@@ -5,6 +5,7 @@ import Image from "next/image";
 import home1 from "../app/images/home1.png"
 import sofa from "./images/unique feature sofa.png"
 import Bottom1 from "./Components/component3";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
         </div>
         <h1 className="text-4xl md:text-5xl font-bold mb-4">New Furniture Collection Trends in 2020</h1>
         <p className="text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.</p>
-        <button className="bg-pink-500 text-white py-2 px-6 rounded-full">Shop Now</button>
+        <Link href="/shop"><button className="bg-pink-500 text-white py-2 px-6 rounded-full hover:">Shop Now</button></Link>
       </div>
       <div className="relative md:w-1/2 mt-8 md:mt-0">
         <Image src={home1} alt="Chair" className="w-60 h-auto" />
@@ -34,7 +35,7 @@ export default function Home() {
       {/* Featured Products */}
       <section className="w-4/5 mx-auto mt-16">
         <h3 className="text-center text-2xl font-bold mb-6">Featured Products</h3>
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
+        <Link href="/shop"><div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
           {/* Product Cards */}
           {[
             { id:7, name: "Comfort Chair", price: "$42.00" },
@@ -54,7 +55,7 @@ export default function Home() {
                 className=" object-cover mb-4"
                 width={200}
                 height={200}
-              />
+              /> 
               <h4 className="text-lg font-semibold">{product.name}</h4>
               <p className="text-gray-500">{product.price}</p>
               {index === 1 && (
@@ -64,13 +65,13 @@ export default function Home() {
               )}
             </div>
           ))}
-        </div>
+        </div></Link>
       </section>
 
       {/* Latest Products */}
       <section className="w-4/5 mx-auto mt-16">
         <h3 className="text-center text-2xl font-bold mb-6">Latest Products</h3>
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <Link href ="/shop"><div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           {[
             { name: "Comfort Handy Craft", price: "$42.00", image: "1" },
             { name: "Comfort Handy Craft", price: "$42.00", image: "2" },
@@ -97,7 +98,7 @@ export default function Home() {
             </div>
           ))}
 
-        </div>
+        </div></Link>
       </section>
 
       {/* Shapex Offer Section */}
@@ -130,9 +131,9 @@ export default function Home() {
               Explore our collection of modern, stylish furniture that blends
               aesthetics with function.
             </p>
-            <button className="bg-pink-500 text-white px-6 py-2 rounded hover:bg-pink-600 transition">
+            <Link href="/shop"><button className="bg-pink-500 text-white px-6 py-2 rounded hover:bg-pink-600 transition">
               Shop Now
-            </button>
+            </button></Link>
           </div>
           <div className="flex-1">
             <Image
@@ -149,7 +150,7 @@ export default function Home() {
         <h2 className="text-3xl font-semibold text-center mb-6">
           Trending Products
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+       <Link href="/shop"><div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {[
             { id: 11, name: "Modern Chair", price: "$120", discount: "20%" },
             { id: 12, name: "Stylish Sofa", price: "$200", discount: "30%" },
@@ -174,7 +175,7 @@ export default function Home() {
               <span className="text-pink-500 text-sm">{item.discount} OFF</span>
             </div>
           ))}
-        </div>
+        </div></Link>
       </section>
 
       {/* Discount Items */}
@@ -196,9 +197,11 @@ export default function Home() {
             <p className="text-gray-700 mb-6">
               Limited time offer! Grab our best deals today.
             </p>
+            <Link href="/shop">
             <button className="bg-pink-500 text-white px-6 py-2 rounded hover:bg-pink-600 transition">
               Shop Now
             </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -208,7 +211,7 @@ export default function Home() {
   <h2 className="text-3xl font-semibold text-center mb-6">
     Top Categories
   </h2>
-  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+  <Link href="/shop"><div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
     {[
       { id: 15, name: "chair" },
       { id: 16, name: "Table" },
@@ -231,7 +234,7 @@ export default function Home() {
         <h3 className="font-semibold">{category.name}</h3>
       </div>
     ))}
-  </div>
+  </div></Link>
 </section>
 
 
@@ -260,7 +263,7 @@ export default function Home() {
       {/* Blog Section */}
       <section className="py-12 px-4">
         <h2 className="text-3xl font-semibold text-center mb-6">Latest Blog</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Link href="/blog"><div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
           { id: 1, name: "Top Essential Trends 2021"},
           { id: 2, name: "Top Essential Trends 2021"},
@@ -286,7 +289,7 @@ export default function Home() {
               </p>
             </div>
           ))}
-        </div>
+        </div></Link>
       </section>
     </div>
 
