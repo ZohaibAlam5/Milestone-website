@@ -7,17 +7,15 @@ import img1 from "../images/about1.jpg"
 import img2 from "../images/about2.jpg"
 import img3 from "../images/about3.jpg"
 import img4 from "../images/about4.jpg"
+import Heading from "../Components/component4";
 
 
 export default function Home(){
     return(
         <div>
             <Header/>
-            <div className="bg-gray-50">
-             <section className="bg-purple-100 text-center py-10">
-               <h1 className="text-3xl font-bold text-gray-800">About US</h1>
-               <p className="mt-2 text-gray-600"></p>
-            </section>
+            <div>
+            <Heading name="About"/>
            </div>
     <div className="space-y-16 p-8 bg-gray-50">
       {/* About Section */}

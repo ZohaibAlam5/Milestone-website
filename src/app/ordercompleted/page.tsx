@@ -2,17 +2,13 @@ import Header from "../Components/component1";
 import Foot from "../Components/component2";
 import Bottom1 from "../Components/component3";
 import Link from "next/link";
+import Heading from "../Components/component4";
 
 export default function Home(){
     return(
         <div>
             <Header/>
-            <div className="bg-gray-50">
-             <section className="bg-purple-100 text-center py-10">
-               <h1 className="text-3xl font-bold text-gray-800">order Completed</h1>
-               <p className="mt-2 text-gray-600"></p>
-            </section>
-           </div>
+          <Heading name="Order Completed"/>
 
 <div className="bg-gray-50 flex items-center justify-center py-4">
   <div className="max-w-md w-full text-center bg-white p-8 rounded-lg shadow">

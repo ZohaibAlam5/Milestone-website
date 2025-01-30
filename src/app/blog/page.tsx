@@ -16,6 +16,7 @@ import {
 import blogimg1 from "../images/blog1.jpg"
 import blogimg2 from "../images/blog2.jpg"
 import blogimg3 from "../images/blog3.jpg"
+import Heading from "../Components/component4";
 
 
 
@@ -23,11 +24,8 @@ export default function Home(){
     return(
         <div>
             <Header/>
-            <div className="bg-gray-50">
-             <section className="bg-purple-100 text-center py-10">
-               <h1 className="text-3xl font-bold text-gray-800">Blog Page</h1>
-               <p className="mt-2 text-gray-600"></p>
-            </section>
+            <div>
+            <Heading name="Blog"/>
           <div>
             <div className="container py-10 2xl:px-20 xl:px-10 lg:px-10 sm:px-8 " >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -177,16 +175,19 @@ export default function Home(){
     <Pagination>
   <PaginationContent>
     <PaginationItem>
-      <PaginationPrevious href="#" />
+      <PaginationPrevious href="/products" />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#">1</PaginationLink>
+      <PaginationLink href="/">1</PaginationLink>
+      <PaginationLink href="/products">2</PaginationLink>
+       <PaginationLink href="/blog">3</PaginationLink>
+       <PaginationLink href="/contact">4</PaginationLink>
     </PaginationItem>
     <PaginationItem>
       <PaginationEllipsis />
     </PaginationItem>
     <PaginationItem>
-      <PaginationNext href="#" />
+      <PaginationNext href="contact" />
     </PaginationItem>
   </PaginationContent>
 </Pagination>

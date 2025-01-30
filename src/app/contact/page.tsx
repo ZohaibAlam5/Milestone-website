@@ -1,20 +1,23 @@
 import React from "react";
-
-
 import Foot from "../Components/component2";
 import Header from "../Components/component1";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
+import Heading from "../Components/component4";
 
 export default function Home(){
     return(
   <div>
        <Header/>
-           <div className="bg-gray-50">
-             <section className="bg-purple-100 text-center py-10">
-               <h1 className="text-3xl font-bold text-gray-800">Contact US</h1>
-               <p className="mt-2 text-gray-600"></p>
-            </section>
-           </div>
-
+     <Heading name="Contact"/>
+     
            <div className="flex flex-col md:flex-row justify-around items-start p-8 bg-white space-y-8 md:space-y-0">
       {/* Left Section */}
       <div className="space-y-8 w-full md:w-1/2">
@@ -83,8 +86,27 @@ export default function Home(){
           </button>
         </form>
       </div>
-   
     </div>
+    <Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="/products" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="/">1</PaginationLink>
+      <PaginationLink href="/products">2</PaginationLink>
+      <PaginationLink href="/blog">3</PaginationLink>
+      <PaginationLink href="/contact">4</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="/faq" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+
     <Foot/>
   </div>
   )

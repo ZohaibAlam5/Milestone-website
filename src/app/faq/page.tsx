@@ -2,17 +2,13 @@
 import Header from "../Components/component1";
 import Foot from "../Components/component2";
 import Bottom1 from "../Components/component3";
+import Heading from "../Components/component4";
 
 export default function Home(){
     return(
         <div>
             <Header/>
-            <div className="bg-gray-50">
-             <section className="bg-purple-100 text-center py-10">
-               <h1 className="text-3xl font-bold text-gray-800">FAQ</h1>
-               <p className="mt-2 text-gray-600"></p>
-            </section>
-           </div>
+           <Heading name="FAQ"/>
 
            <div className="flex flex-col md:flex-row justify-between items-start bg-gray-50 p-8 space-y-12 md:space-y-0 md:space-x-8">
       {/* General Information Section */}

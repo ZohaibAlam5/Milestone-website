@@ -1,160 +1,215 @@
-import Link from 'next/link';
-import Header from '../Components/component1';
-import Foot from '../Components/component2';
-import Bottom1 from '../Components/component3';
-import Image from 'next/image';
+"use client";
 
-const products = [
-  
-  {
-  id:1,
-  name: 'Dictum morbi',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  price: 70.0,
-  discountPrice: 55.0,
-  image: '/shop1.png', 
-  rating: 4.5,
-  reviews: 125,
-},
-{
-  id: 2,
-  name: 'Sodales sit',
-  description: 'Magna in est adipiscing in pharetra non in justo.',
-  price: 25.0,
-  discountPrice: 15.0,
-  image: '/shop2.png',
-  rating: 4.0,
-  reviews: 89,
-},
-{
-  id: 3,
-  name: 'Nibh Various',
-  description: 'Magna in est adipiscing in pharetra non in justo.',
-  price: 25.0,
-  discountPrice: 15.0,
-  image: '/shop3.png',
-  rating: 4.0,
-  reviews: 89,
-},
-{
-  id: 4,
-  name: 'Morius Quis',
-  description: 'Magna in est adipiscing in pharetra non in justo.',
-  price: 25.0,
-  discountPrice: 15.0,
-  image: '/shop4.png',
-  rating: 4.0,
-  reviews: 89,
-},
-{
-  id: 5,
-  name: 'Morbi Sagittis',
-  description: 'Magna in est adipiscing in pharetra non in justo.',
-  price: 25.0,
-  discountPrice: 15.0,
-  image: '/shop5.png',
-  rating: 4.0,
-  reviews: 89,
-},
-{
-  id: 6,
-  name: 'seccelie deginism',
-  description: 'Magna in est adipiscing in pharetra non in justo.',
-  price: 25.0,
-  discountPrice: 15.0,
-  image: '/shop6.png',
-  rating: 4.0,
-  reviews: 89,
-},
-// Add more products here
-];
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import Header from "../Components/component1";
+import Foot from "../Components/component2";
+import Bottom1 from "../Components/component3";
+import { client } from "@/sanity/lib/client";
+import Heading from "../Components/component4";
 
+// Fetch products from Sanity
+async function fetchShopProducts() {
+  const query = `*[_type == 'Shop']{
+    ProductID,
+    ProductName,
+    "imageUrl": ProductImage.asset->url,
+    ProductPrice,
+    ProductDescription,
+    ProductDiscount,
+    ProductBrand,
+    ProductCategory
+  }`;
+  return await client.fetch(query);
+}
 
+export default function Shop() {
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
-export default function Home() {
+  const [products, setProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedPrice, setSelectedPrice] = useState<string>("");
+
+  // Fetch products when the component mounts
+  useEffect(() => {
+    async function loadProducts() {
+      const data = await fetchShopProducts();
+      setProducts(data);
+      setFilteredProducts(data); // Set initial filtered products
+    }
+    loadProducts();
+  }, []);
+
+  // Filter products whenever searchQuery, brands, categories, or price changes
+  useEffect(() => {
+    let filtered = [...products]; // Start with all products
+
+    // Apply search filter
+    if (searchQuery) {
+      filtered = filtered.filter((product) =>
+        product.ProductName.toLowerCase().includes(searchQuery)
+      );
+    }
+
+    // Apply brand filter
+    if (selectedBrands.length > 0) {
+      filtered = filtered.filter((product) =>
+        selectedBrands.includes(product.ProductBrand)
+      );
+    }
+
+    // Apply category filter
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter((product) =>
+        selectedCategories.includes(product.ProductCategory)
+      );
+    }
+
+    // Apply price filter
+    if (selectedPrice) {
+      const priceRanges: { [key: string]: [number, number] } = {
+        "0-150": [0, 150],
+        "150-350": [150, 350],
+        "350-550": [350, 550],
+        "550-650": [550, 650],
+        "650-1000": [650, 1000],
+        "1000+": [1000, Infinity],
+      };
+      const [min, max] = priceRanges[selectedPrice];
+      filtered = filtered.filter(
+        (product) => product.ProductPrice >= min && product.ProductPrice <= max
+      );
+    }
+
+    setFilteredProducts(filtered);
+  }, [searchQuery, selectedBrands, selectedCategories, selectedPrice, products]);
+
+  // Handle brand filter selection
+  const handleBrandChange = (brand: string) => {
+    setSelectedBrands((prev) =>
+      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
+    );
+  };
+
+  // Handle category filter selection
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
+    );
+  };
+
   return (
     <div>
-        <Header/>
-        <div className="bg-gray-50">
-             <section className="bg-purple-100 text-center py-10">
-               <h1 className="text-3xl font-bold text-gray-800">Shop</h1>
-               <p className="mt-2 text-gray-600"></p>
-            </section>
-          </div>
-    <div className="flex flex-col md:flex-row container mx-auto px-4 py-8">
-      {/* Left Sidebar */}
-      <aside className="w-full md:w-1/4 bg-gray-50 p-4 rounded-md shadow">
-        <h2 className="text-lg font-semibold text-gray-700 mb-4">Filters</h2>
+      <Header />
+      <Heading name="Shop"/>
 
-        <div className="mb-6">
-          <h3 className="text-md font-medium text-gray-600 mb-2">Product Brand</h3>
-          <ul className="space-y-1">
-            <li><input type="checkbox" /> Coaster Furniture</li>
-            <li><input type="checkbox" /> Fusion Dot High Fashion</li>
-            <li><input type="checkbox" /> Unique Furniture </li>
-            <li><input type="checkbox" /> Dream Furniture</li>
-            <li><input type="checkbox" /> Young Repurposed</li>
-            <li><input type="checkbox" /> Green Furniture</li>
-            {/* Add more brands */}
-          </ul>
-        </div>
+      <div className="flex flex-col md:flex-row container mx-auto px-4 py-8">
+        {/* Left Sidebar */}
+        <aside className="w-full md:w-1/4 bg-gray-50 p-4 rounded-md shadow">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">Filters</h2>
 
-        <div className="mb-6">
-          <h3 className="text-md font-medium text-gray-600 mb-2">Categories</h3>
-          <ul className="space-y-1">
-            <li><input type="checkbox" /> Accessories</li>
-            <li><input type="checkbox" /> Watches</li>
-            <li><input type="checkbox" /> Magento</li>
-            <li><input type="checkbox" /> clothes</li>
-            <li><input type="checkbox" /> Furniture</li>
-            {/* Add more categories */}
-          </ul>
-        </div>
-
-        <div className="mb-6">
-          <h3 className="text-md font-medium text-gray-600 mb-2">Price Filter</h3>
-          <ul className="space-y-1">
-            <li><input type="radio" name="price" /> $0 - $150</li>
-            <li><input type="radio" name="price" /> $150 - $350</li>
-            <li><input type="radio" name="price" /> $350 - $550</li>
-            <li><input type="radio" name="price" /> $550 - $650</li>  
-            <li><input type="radio" name="price" /> $650 - $1000</li>
-            <li><input type="radio" name="price" /> above $1000</li>        
+          <div className="mb-6">
+            <h3 className="text-md font-medium text-gray-600 mb-2">Product Brand</h3>
+            <ul className="space-y-1">
+              {["Coaster Furniture", "Fusion Dot High Fashion", "Unique Furniture", "Dream Furniture", "Young Repurposed", "Green Furniture"].map(
+                (brand) => (
+                  <li key={brand}>
+                    <input
+                      type="checkbox"
+                      checked={selectedBrands.includes(brand)}
+                      onChange={() => handleBrandChange(brand)}
+                    />{" "}
+                    {brand}
+                  </li>
+                )
+              )}
             </ul>
-        </div>
-      </aside>
+          </div>
 
-      {/* Products Section */}
-      <main className="flex-1 md:ml-8">
-        <h1 className="text-xl font-semibold text-gray-800 mb-4">Ecommerce Accessories & Fashion</h1>
+          <div className="mb-6">
+            <h3 className="text-md font-medium text-gray-600 mb-2">Categories</h3>
+            <ul className="space-y-1">
+              {["Accessories", "Watches", "Magento", "Clothes", "Furniture"].map(
+                (category) => (
+                  <li key={category}>
+                    <input
+                      type="checkbox"
+                      checked={selectedCategories.includes(category)}
+                      onChange={() => handleCategoryChange(category)}
+                    />{" "}
+                    {category}
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
-            <div key={product.id} className="bg-white rounded-lg shadow p-4 hover:shadow-lg transition">
-              <Link href={`/shop/${product.id-1}`}>
-                <div>
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    className="rounded-md w-full h-40 object-cover mb-4"
-                    width={300}
-                    height={200}
-                  />
-                  <h3 className="text-lg font-semibold text-gray-700">{product.name}</h3>
-                  <p className="text-gray-500 text-sm">{product.description}</p>
-                  <div className="mt-2 flex justify-between items-center">
-                    <p className="text-gray-800 font-bold">${product.discountPrice}</p>
-                    <p className="text-gray-500 line-through">${product.price}</p>
+          <div className="mb-6">
+            <h3 className="text-md font-medium text-gray-600 mb-2">Price Filter</h3>
+            <ul className="space-y-1">
+              {[
+                ["0-150", "$0 - $150"],
+                ["150-350", "$150 - $350"],
+                ["350-550", "$350 - $550"],
+                ["550-650", "$550 - $650"],
+                ["650-1000", "$650 - $1000"],
+                ["1000+", "Above $1000"],
+              ].map(([value, label]) => (
+                <li key={value}>
+                  <input
+                    type="radio"
+                    name="price"
+                    value={value}
+                    checked={selectedPrice === value}
+                    onChange={() => setSelectedPrice(value)}
+                  />{" "}
+                  {label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+
+        {/* Products Section */}
+        <main className="flex-1 md:ml-8">
+          <h1 className="text-xl font-semibold text-gray-800 mb-4">Shop Products</h1>
+
+          {filteredProducts.length === 0 ? (
+            <p className="text-gray-600">No products found.</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProducts.map((product) => (
+                <div key={product.ProductID} className="bg-white rounded-lg shadow p-4">
+                  <Link href={`/shop/${product.ProductID}`} passHref>
+                    <Image
+                      src={product.imageUrl}
+                      alt={product.ProductName}
+                      className="rounded-md w-full object-cover"
+                      width={300}
+                      height={200}
+                    />
+                  </Link>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-semibold text-gray-700">{product.ProductName}</h3>
+                    <p className="text-gray-500 text-sm">{product.ProductDescription}</p>
+                    <p className="text-gray-800 font-bold mt-2">
+                      ${product.ProductDiscount || product.ProductPrice}
+                    </p>
                   </div>
                 </div>
-              </Link>
+              ))}
             </div>
-          ))}
-        </div>
-      </main>
-    </div>
-    <Bottom1/>
-    <Foot/>
+          )}
+        </main>
+      </div>
+
+      <Bottom1 />
+      <Foot />
     </div>
   );
 }

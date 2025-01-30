@@ -1,18 +1,13 @@
 import Header from "../Components/component1";
 import Foot from "../Components/component2";
 import Bottom1 from "../Components/component3";
+import Heading from "../Components/component4";
 
 export default function Home(){
     return(
         <div>
         <Header/>
-
-        <div className="bg-gray-50">
-             <section className="bg-purple-100 text-center py-10">
-               <h1 className="text-3xl font-bold text-gray-800">Account Page</h1>
-               <p className="mt-2 text-gray-600"></p>
-            </section>
-           </div>
+       <Heading name="Account Page"/>
 
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">

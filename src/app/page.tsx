@@ -6,6 +6,15 @@ import home1 from "../app/images/home1.png"
 import sofa from "./images/unique feature sofa.png"
 import Bottom1 from "./Components/component3";
 import Link from "next/link";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 export default function Home() {
   return (
@@ -228,7 +237,7 @@ export default function Home() {
             alt={category.name}
             className="mx-auto object-cover mb-4"
             width={90}
-            height={50} // Keep aspect ratio consistent
+            height={50} 
           />
         </div>
         <h3 className="font-semibold">{category.name}</h3>
@@ -292,10 +301,31 @@ export default function Home() {
         </div></Link>
       </section>
     </div>
-
+  </div>
+  <div>
+  <Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="/" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="/">1</PaginationLink>
+      <PaginationLink href="/products">2</PaginationLink>
+      <PaginationLink href="/blog">3</PaginationLink>
+       <PaginationLink href="/contact">4</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="/products" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
   </div>
     <Foot/>
     </div>
 
   );
 }
+ 
